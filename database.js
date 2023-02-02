@@ -1,9 +1,14 @@
- // Store Form Data in MySQL
- connection.query('INSERT INTO submissions SET ?', formData, (error, results) => {
-    if (error) {
-      console.log(error);
-      res.status(500).send('Error storing form data in database');
-    } else {
-      res.status(200).send('Form data stored in database');
-    }
-  });
+// Creates a connection to mysql database and returns it so as to be consumed later on when making requests
+let mysql = require('mysql');
+let conn = mysql.createConnection({
+    host: 'localhost', // Replace with your host name
+    user: 'root',      // Replace with your database username
+    password: 'root',      // Replace with your database password
+    database: 'forms'
+});
+
+conn.connect(function (err) {
+    if (err) throw err;
+    console.log('Database is connected successfully !');
+});
+module.exports = conn;
